@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-backdrop text-whisper font-sans">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="/style.css" rel="stylesheet">
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <nav class="p-4 border-b border-whisper">
+      <h1 class="text-xl font-bold">✶ MODSUAV</h1>
+    </nav>
+
+    <main class="flex-1 p-8">
+      {{ content | safe }}
+    </main>
+
+    <footer class="p-4 border-t border-whisper text-sm text-center">
+      feito com alma • assinatura marcada na dobra do tempo
+    </footer>
+  </body>
+</html>

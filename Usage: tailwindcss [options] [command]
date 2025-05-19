@@ -1,0 +1,16 @@
+Usage: tailwindcss [options] [command]
+
+Options:
+  -i, --input <file>         Input file
+  -o, --output <file>        Output file
+  -w, --watch                Watch for changes and rebuild as needed
+  -m, --minify               Minify the output
+  -c, --config <path>        Path to Tailwind config file
+  -p, --postcss              Use PostCSS configuration
+  -h, --help                 Display help for command
+  -v, --version              Display version number
+
+Commands:
+  init [options]             Generate a basic Tailwind config file
+  build [options]            Build your CSS
+  help [command]             Display help for command
