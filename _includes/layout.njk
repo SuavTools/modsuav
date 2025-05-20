@@ -97,7 +97,23 @@
       </button>
       <div id="freedomPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
         <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
-        <a href="/branches" class="block text-base">Branches</a>
+
+
+        <!-- ✶ Mobile Branches Flyout -->
+<button id="branchesToggleMobile" class="flex items-center gap-1 w-full text-left">
+  Branches
+  <svg id="branchesChevronMobile" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+  </svg>
+</button>
+
+<div id="branchesPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+  <a href="/branches/figma-tools" class="block text-base">Figma Tools</a>
+  <a href="/branches/webflow-ghl" class="block text-base">Webflow → GHL</a>
+  <a href="/branches/api-access" class="block text-base">API Access</a>
+</div>
+
+
         <a href="/docs" class="block text-base">Docs</a>
       </div>
       <a href="/creative" class="block">Creative</a>
@@ -203,6 +219,17 @@
           const open = freedomPanelMobile.classList.toggle("hidden");
           freedomChevronMobile?.classList.toggle("rotate-180", open);
         });
+
+
+        // ✶ Mobile Branches flyout
+const branchesToggleMobile = document.getElementById("branchesToggleMobile");
+const branchesPanelMobile = document.getElementById("branchesPanelMobile");
+const branchesChevronMobile = document.getElementById("branchesChevronMobile");
+
+branchesToggleMobile?.addEventListener("click", () => {
+  const open = branchesPanelMobile.classList.toggle("hidden");
+  branchesChevronMobile?.classList.toggle("rotate-180", open);
+});
 
 
 
