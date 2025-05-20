@@ -275,15 +275,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 // Click outside to close
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && isOpen) {
+document.addEventListener("click", (e) => {
+  if (
+    isOpen &&
+    !panel.contains(e.target) &&
+    !toggleBtn.contains(e.target)
+  ) {
     isOpen = false;
     panel.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
     panel.classList.remove("translate-y-0");
     chevron?.classList.remove("rotate-180");
   }
 });
+
 
 
     //branches submenu 
