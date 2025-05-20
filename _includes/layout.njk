@@ -3,7 +3,7 @@
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
   <!-- ✶ LOADING SCREEN -->
-  <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center space-y-2 text-sm font-mono transition-opacity duration-500">
+  <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center space-y-2 text-sm font-mono transition-opacity duration-[1200ms]">
     <span class="animate-pulse">✶ linking to grove tree...</span>
     <span class="opacity-60">initializing modsuav console</span>
     <span class="opacity-40 text-suav">syncing memory...</span>
@@ -49,15 +49,15 @@
   </footer>
 
   <!-- ✶ LOADER SCRIPT -->
-  <script>
-    window.addEventListener("load", () => {
-      const loader = document.getElementById("loader");
-      if (loader) {
-        loader.classList.add("opacity-0");
-        setTimeout(() => loader.remove(), 600);
-      }
-    });
-  </script>
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+    if (loader) {
+      loader.classList.add("opacity-0");
+      setTimeout(() => loader.remove(), 1600); // ← Slowed to 1.6s
+    }
+  });
+</script>
 
 </body>
 
