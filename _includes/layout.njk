@@ -65,50 +65,6 @@
       </div>
     </div>
 
-    <!-- ✶ MOBILE NAV OVERLAY and footer/scripts assumed below -->
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const toggleBtn = document.getElementById("freedomToggleDesktop");
-        const panel = document.getElementById("freedomPanelDesktop");
-        const chevron = document.getElementById("freedomChevronDesktop");
-
-        let isOpen = false;
-
-        toggleBtn?.addEventListener("click", (e) => {
-          e.stopPropagation();
-          isOpen = !isOpen;
-          panel.classList.toggle("opacity-0", !isOpen);
-          panel.classList.toggle("pointer-events-none", !isOpen);
-          panel.classList.toggle("-translate-y-2", !isOpen);
-          panel.classList.toggle("translate-y-0", isOpen);
-          chevron?.classList.toggle("rotate-180", isOpen);
-        });
-
-        document.addEventListener("click", (e) => {
-          if (
-            isOpen &&
-            !panel.contains(e.target) &&
-            !toggleBtn.contains(e.target)
-          ) {
-            isOpen = false;
-            panel.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
-            panel.classList.remove("translate-y-0");
-            chevron?.classList.remove("rotate-180");
-          }
-        });
-
-        const branchesToggleDesktop = document.getElementById("branchesToggleDesktop");
-        const branchesPanelDesktop = document.getElementById("branchesPanelDesktop");
-        const branchesChevronDesktop = document.getElementById("branchesChevronDesktop");
-
-        branchesToggleDesktop?.addEventListener("click", () => {
-          const open = branchesPanelDesktop.classList.toggle("hidden");
-          branchesChevronDesktop?.classList.toggle("rotate-180", open);
-        });
-      });
-
-
 
 
     <!-- ✶ CONSOLE SCRIPT -->
@@ -167,6 +123,59 @@
         document.getElementById("loader")?.remove();
       }
     </script>
+
+
+
+
+
+
+    <!-- ✶ MOBILE NAV OVERLAY and footer/scripts assumed below -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("freedomToggleDesktop");
+        const panel = document.getElementById("freedomPanelDesktop");
+        const chevron = document.getElementById("freedomChevronDesktop");
+
+        let isOpen = false;
+
+        toggleBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isOpen = !isOpen;
+          panel.classList.toggle("opacity-0", !isOpen);
+          panel.classList.toggle("pointer-events-none", !isOpen);
+          panel.classList.toggle("-translate-y-2", !isOpen);
+          panel.classList.toggle("translate-y-0", isOpen);
+          chevron?.classList.toggle("rotate-180", isOpen);
+        });
+
+        document.addEventListener("click", (e) => {
+          if (
+            isOpen &&
+            !panel.contains(e.target) &&
+            !toggleBtn.contains(e.target)
+          ) {
+            isOpen = false;
+            panel.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
+            panel.classList.remove("translate-y-0");
+            chevron?.classList.remove("rotate-180");
+          }
+        });
+
+        const branchesToggleDesktop = document.getElementById("branchesToggleDesktop");
+        const branchesPanelDesktop = document.getElementById("branchesPanelDesktop");
+        const branchesChevronDesktop = document.getElementById("branchesChevronDesktop");
+
+        branchesToggleDesktop?.addEventListener("click", () => {
+          const open = branchesPanelDesktop.classList.toggle("hidden");
+          branchesChevronDesktop?.classList.toggle("rotate-180", open);
+        });
+      });
+
+
+
+
+
 
 
 
