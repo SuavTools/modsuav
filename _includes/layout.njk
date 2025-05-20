@@ -2,7 +2,7 @@
 
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-<audio id="boot-sound" src="/bootup.mp3" preload="auto"></audio>
+<audio id="boot-sound" src="/intro.mp3" preload="auto"></audio>
 
   <!-- ✶ LOADER (shows immediately) -->
 <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
@@ -64,7 +64,7 @@
 
   const bootSound = document.getElementById("boot-sound");
 
-  // only run the loader once per session
+  // Only run loader once per tab session
   if (!sessionStorage.getItem("modsuavLoaded")) {
     sessionStorage.setItem("modsuavLoaded", "true");
 
@@ -72,19 +72,19 @@
     const loaderMessage = document.getElementById("loader-message");
     const dotSequence = document.getElementById("dot-sequence");
 
-    // boot sound
+    // Try to play intro sound
     bootSound?.play().catch(() => {});
 
-    // animate dots
-    let dotState = 0;
+    // Animate dots
     const dots = [".", "..", "..."];
+    let dotState = 0;
     const dotTimer = setInterval(() => {
       dotState = (dotState + 1) % dots.length;
       dotSequence.textContent = dots[dotState];
     }, 300); // faster dots
 
-    // cycle messages
-    const messageDelay = 500; // faster transitions
+    // Cycle messages
+    const messageDelay = 500;
     const messageTimer = setInterval(() => {
       messageIndex++;
       if (messageIndex >= messages.length) {
@@ -95,17 +95,17 @@
       loaderMessage.textContent = messages[messageIndex];
     }, messageDelay);
 
-    // fade out loader
+    // Fade out and remove loader
     setTimeout(() => {
       const loader = document.getElementById("loader");
       if (loader) {
         loader.classList.add("opacity-0");
-        setTimeout(() => loader.remove(), 600); // faster fade
+        setTimeout(() => loader.remove(), 600); // fade duration
       }
-    }, messageDelay * (messages.length + 1));
+    }, messageDelay * (messages.length + 1)); // wait full sequence
 
   } else {
-    // skip loader if already loaded once
+    // Already loaded → skip loader
     document.getElementById("loader")?.remove();
   }
 </script>
