@@ -27,7 +27,7 @@
 <!-- ✶ DESKTOP PANEL -->
 
 
-<div
+
 <div id="freedomPanelDesktop"
   class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
          text-whisper font-mono text-sm z-50 overflow-y-auto
@@ -224,7 +224,15 @@
 
 
 
+// ✶ Mobile branches flyout
+const branchesToggleMobile = document.getElementById("branchesToggleMobile");
+const branchesPanelMobile = document.getElementById("branchesPanelMobile");
+const branchesChevronMobile = document.getElementById("branchesChevronMobile");
 
+branchesToggleMobile?.addEventListener("click", () => {
+  const open = branchesPanelMobile.classList.toggle("hidden");
+  branchesChevronMobile?.classList.toggle("rotate-180", open);
+});
 
 
 
