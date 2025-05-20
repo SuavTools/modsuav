@@ -2,10 +2,7 @@
 
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-  <!-- ✶ AUDIO -->
-<audio id="boot-sound" preload="auto">
-  <source src="/intro.mp3" type="audio/mpeg" />
-</audio>
+
 
   <!-- ✶ LOADER -->
   <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
@@ -14,6 +11,11 @@
     </div>
     <div id="loader-message" class="opacity-70">initializing modsuav console</div>
   </div>
+
+    <!-- ✶ AUDIO -->
+<audio id="boot-sound" preload="auto">
+  <source src="/intro.mp3" type="audio/mpeg" />
+</audio>
 
   <!-- ✶ NAVIGATION -->
   <nav class="p-4 bg-[#111111] flex justify-between items-center">
