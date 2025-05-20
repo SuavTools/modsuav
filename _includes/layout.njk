@@ -23,28 +23,32 @@
     <!-- ✶ DESKTOP NAV -->
     {% include "nav.njk" %}
 
-    <!-- ✶ DESKTOP 50VH DROPDOWN -->
+
+<!-- ✶ DESKTOP PANEL -->
 <div
   id="freedomPanelDesktop"
   class="hidden fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
-         text-whisper font-mono text-sm z-40 transition-all duration-300 ease-in-out overflow-y-auto"
+         text-whisper font-mono text-sm z-50 transition-all duration-300 ease-in-out overflow-y-auto"
 >
   <div class="w-full px-6 md:px-12 py-12">
-  <div class="flex flex-col md:flex-row justify-between gap-12 max-w-6xl mx-auto">
-    <!-- Left Side -->
-    <div class="space-y-3 max-w-xl">
-      <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
-      <p class="opacity-80 leading-snug">
-        Soul-coded tools for artists and studios. No roadmap. Just resonance.
-      </p>
-      <p class="text-xs text-neutral-500">Everything here hums quietly until called.</p>
-    </div>
+    <div class="flex flex-col md:flex-row justify-between gap-12 max-w-6xl mx-auto">
+      <!-- Left -->
+      <div class="space-y-3 max-w-xl">
+        <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
+        <p class="opacity-80 leading-snug">
+          Soul-coded tools for artists and studios. No roadmap. Just resonance.
+        </p>
+        <p class="text-xs text-neutral-500">
+          Everything here hums quietly until called.
+        </p>
+      </div>
 
-    <!-- Right Side -->
-    <div class="space-y-2">
-      <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
-      <a href="/branches" class="block hover:text-suav transition">Branches</a>
-      <a href="/docs" class="block hover:text-suav transition">Docs</a>
+      <!-- Right -->
+      <div class="space-y-2">
+        <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
+        <a href="/branches" class="block hover:text-suav transition">Branches</a>
+        <a href="/docs" class="block hover:text-suav transition">Docs</a>
+      </div>
     </div>
   </div>
 </div>
