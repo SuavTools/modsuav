@@ -152,19 +152,49 @@
     if (!toggleBtn) console.warn("⚠️ freedomToggle not found");
     if (!panel) console.warn("⚠️ freedomPanel not found");
 
+    // 🍔 Mobile Menu
     menuToggle?.addEventListener("click", () => {
       console.log("🍔 Hamburger clicked");
       navLinks?.classList.toggle("hidden");
+
+      const isOpen = !navLinks?.classList.contains("hidden");
+      document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
+    // ✶ Freedom34 Flyout
     toggleBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
       console.log("✶ Freedom34 clicked");
       panel?.classList.toggle("hidden");
       chevronIcon?.classList.toggle("rotate-180");
+
+      const isOpen = !panel?.classList.contains("hidden");
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+
+    // 🧹 Auto-collapse mobile nav when link clicked
+    document.querySelectorAll("#navLinks a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 768 && !navLinks?.classList.contains("hidden")) {
+          navLinks.classList.add("hidden");
+          document.body.style.overflow = "";
+          console.log("🧹 Mobile nav closed on link click");
+        }
+      });
+    });
+
+    // ESC to close both
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        navLinks?.classList.add("hidden");
+        panel?.classList.add("hidden");
+        chevronIcon?.classList.remove("rotate-180");
+        document.body.style.overflow = "";
+      }
     });
   });
 </script>
+
 
 
 
