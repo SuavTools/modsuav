@@ -72,20 +72,33 @@
       "✶ ready"
     ];
 
+// Get audio element once
 const bootSound = document.getElementById("boot-sound");
-let userHasClicked = false;
 
+// Try autoplay (may fail silently due to browser rules)
+bootSound?.play().catch((err) => {
+  console.log("Autoplay blocked, will wait for user interaction:", err);
+});
+
+let hasUserClicked = false;
+
+// Only run this on the first real user click
 window.addEventListener("click", () => {
-  if (userHasClicked) return; // already played + shown
+  if (hasUserClicked) return;
+  hasUserClicked = true;
 
-  userHasClicked = true;
-  bootSound?.play().catch(err => console.warn("Playback failed:", err));
+  // Play boot sound
+  bootSound?.play().catch(err => {
+    console.warn("Manual playback failed:", err);
+  });
 
+  // Show connection message
   const clickMessage = document.getElementById("click-message");
   if (clickMessage) {
     clickMessage.classList.remove("opacity-0");
     clickMessage.classList.add("opacity-100");
 
+    // Optional: fade it out
     setTimeout(() => {
       clickMessage.classList.remove("opacity-100");
       clickMessage.classList.add("opacity-0");
