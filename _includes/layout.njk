@@ -116,51 +116,34 @@
 
 
 <script>
-  const toggleBtn = document.getElementById("freedomToggle");
-  const chevronIcon = document.getElementById("freedomChevron");
-  const panel = document.getElementById("freedomPanel");
-  const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("✅ DOM fully loaded");
 
-  let panelOpen = false;
-  let menuOpen = false;
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const toggleBtn = document.getElementById("freedomToggle");
+    const chevronIcon = document.getElementById("freedomChevron");
+    const panel = document.getElementById("freedomPanel");
 
-  // Mobile menu toggle
-  menuToggle?.addEventListener("click", () => {
-    menuOpen = !menuOpen;
-    navLinks.classList.toggle("hidden", !menuOpen);
-  });
+    if (!menuToggle) console.warn("⚠️ menuToggle not found");
+    if (!navLinks) console.warn("⚠️ navLinks not found");
+    if (!toggleBtn) console.warn("⚠️ freedomToggle not found");
+    if (!panel) console.warn("⚠️ freedomPanel not found");
 
-  // Freedom34 flyout
-  toggleBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    panelOpen = !panelOpen;
-    panel.classList.toggle("hidden", !panelOpen);
-    chevronIcon?.classList.toggle("rotate-180", panelOpen);
-  });
+    menuToggle?.addEventListener("click", () => {
+      console.log("🍔 Hamburger clicked");
+      navLinks?.classList.toggle("hidden");
+    });
 
-  document.addEventListener("click", (e) => {
-    if (
-      panelOpen &&
-      !panel.contains(e.target) &&
-      !toggleBtn.contains(e.target)
-    ) {
-      panel.classList.add("hidden");
-      chevronIcon?.classList.remove("rotate-180");
-      panelOpen = false;
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      panel.classList.add("hidden");
-      navLinks.classList.add("hidden");
-      chevronIcon?.classList.remove("rotate-180");
-      panelOpen = false;
-      menuOpen = false;
-    }
+    toggleBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      console.log("✶ Freedom34 clicked");
+      panel?.classList.toggle("hidden");
+      chevronIcon?.classList.toggle("rotate-180");
+    });
   });
 </script>
+
 
 
 
