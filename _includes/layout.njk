@@ -9,6 +9,15 @@
 
   <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
+
+    <!-- ✶ LOADER -->
+    <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
+      <div class="text-suav animate-pulse">✶ <span id="dot-sequence">.</span></div>
+      <div id="loader-message" class="opacity-70">initializing modsuav console</div>
+    </div>
+
+
+
     {% include "nav.njk" %}
 
     <!-- ✶ DESKTOP PANEL -->
