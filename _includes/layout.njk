@@ -1,16 +1,19 @@
-<link href="style.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet" />
 
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-<audio id="boot-sound" src="/intro.mp3" preload="auto"></audio>
+  <!-- ✶ AUDIO -->
+  <audio id="boot-sound" preload="auto">
+    <source src="/intro.mp3" type="audio/mpeg" />
+  </audio>
 
-  <!-- ✶ LOADER (shows immediately) -->
-<div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
-  <div class="text-suav animate-pulse">
-    ✶ <span id="dot-sequence">.</span>
+  <!-- ✶ LOADER -->
+  <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
+    <div class="text-suav animate-pulse">
+      ✶ <span id="dot-sequence">.</span>
+    </div>
+    <div id="loader-message" class="opacity-70">initializing modsuav console</div>
   </div>
-  <div id="loader-message" class="opacity-70">initializing modsuav console</div>
-</div>
 
   <!-- ✶ NAVIGATION -->
   <nav class="p-4 bg-[#111111] flex justify-between items-center">
@@ -51,66 +54,64 @@
     tudo que levo, devolvo com alma. <span class="text-whisper">assinatura: marcada na dobra do tempo</span>
   </footer>
 
-<!-- ✶ LOADER SCRIPT -->
-<script>
-  const messages = [
-    "initializing modsuav console",
-    "linking to grove tree",
-    "calibrating soul-interface",
-    "establishing frequency sync",
-    "syncing encrypted memory",
-    "✶ ready"
-  ];
+  <!-- ✶ LOADER SCRIPT -->
+  <script>
+    const messages = [
+      "initializing modsuav console",
+      "linking to grove tree",
+      "calibrating soul-interface",
+      "establishing frequency sync",
+      "syncing encrypted memory",
+      "✶ ready"
+    ];
 
-  const bootSound = document.getElementById("boot-sound");
+    const bootSound = document.getElementById("boot-sound");
 
-  // Only run loader once per tab session
-  if (!sessionStorage.getItem("modsuavLoaded")) {
-    sessionStorage.setItem("modsuavLoaded", "true");
+    // Attempt autoplay
+    bootSound?.play().catch(() => {
+      window.addEventListener("click", () => {
+        bootSound?.play().catch(() => {});
+      }, { once: true });
+    });
 
-    let messageIndex = 0;
-    const loaderMessage = document.getElementById("loader-message");
-    const dotSequence = document.getElementById("dot-sequence");
+    if (!sessionStorage.getItem("modsuavLoaded")) {
+      sessionStorage.setItem("modsuavLoaded", "true");
 
-    // Try to play intro sound
-    bootSound?.play().catch(() => {});
+      let messageIndex = 0;
+      const loaderMessage = document.getElementById("loader-message");
+      const dotSequence = document.getElementById("dot-sequence");
 
-    // Animate dots
-    const dots = [".", "..", "..."];
-    let dotState = 0;
-    const dotTimer = setInterval(() => {
-      dotState = (dotState + 1) % dots.length;
-      dotSequence.textContent = dots[dotState];
-    }, 300); // faster dots
+      const dots = [".", "..", "..."];
+      let dotState = 0;
+      const dotTimer = setInterval(() => {
+        dotState = (dotState + 1) % dots.length;
+        dotSequence.textContent = dots[dotState];
+      }, 300);
 
-    // Cycle messages
-    const messageDelay = 500;
-    const messageTimer = setInterval(() => {
-      messageIndex++;
-      if (messageIndex >= messages.length) {
-        clearInterval(messageTimer);
-        clearInterval(dotTimer);
-        return;
-      }
-      loaderMessage.textContent = messages[messageIndex];
-    }, messageDelay);
+      const messageDelay = 500;
+      const messageTimer = setInterval(() => {
+        messageIndex++;
+        if (messageIndex >= messages.length) {
+          clearInterval(messageTimer);
+          clearInterval(dotTimer);
+          return;
+        }
+        loaderMessage.textContent = messages[messageIndex];
+      }, messageDelay);
 
-    // Fade out and remove loader
-    setTimeout(() => {
-      const loader = document.getElementById("loader");
-      if (loader) {
-        loader.classList.add("opacity-0");
-        setTimeout(() => loader.remove(), 600); // fade duration
-      }
-    }, messageDelay * (messages.length + 1)); // wait full sequence
-
-  } else {
-    // Already loaded → skip loader
-    document.getElementById("loader")?.remove();
-  }
-</script>
-
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        if (loader) {
+          loader.classList.add("opacity-0");
+          setTimeout(() => loader.remove(), 600);
+        }
+      }, messageDelay * (messages.length + 1));
+    } else {
+      document.getElementById("loader")?.remove();
+    }
+  </script>
 
 </body>
+
 
 
