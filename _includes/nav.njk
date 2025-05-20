@@ -1,26 +1,28 @@
-<nav class="p-4 bg-[#111111] flex justify-between items-center relative z-50">
-  <div class="flex items-center gap-3">
-    <img src="/logo.svg" alt="SUAV logo" class="h-6 w-6" />
-    <span class="text-whisper font-bold tracking-wide text-lg">modsuav*</span>
-  </div>
-
-  <ul class="flex gap-6 text-sm font-medium items-center">
-    <li><a href="/" class="hover:text-suav transition">Início</a></li>
-
-    <!-- Freedom34 with flyout -->
-    <li class="relative">
-      <button id="freedomToggle" class="hover:text-suav transition inline-flex items-center gap-1">
-  Freedom34
-  <svg id="freedomChevron" class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+<!-- Mobile Toggle Button -->
+<button id="menuToggle" class="md:hidden text-whisper focus:outline-none">
+  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M4 6h16M4 12h16M4 18h16" />
   </svg>
 </button>
-    </li>
 
-    <li><a href="/creative" class="hover:text-suav transition">Creative</a></li>
-    <li><a href="/philosophy" class="hover:text-suav transition">Philosophy</a></li>
-    <li><a href="/contact" class="hover:text-suav transition">Contact</a></li>
-  </ul>
+<!-- Main Nav Links -->
+<ul id="navLinks" class="hidden md:flex flex-col md:flex-row gap-6 text-sm font-medium items-start md:items-center absolute md:static top-full left-0 w-full bg-[#111111] md:w-auto px-6 py-4 md:p-0 z-40">
+  <li><a href="/" class="block hover:text-suav transition">Início</a></li>
+
+  <li class="relative">
+    <button id="freedomToggle" class="hover:text-suav transition inline-flex items-center gap-1">
+      Freedom34
+      <svg id="freedomChevron" class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </li>
+
+  <li><a href="/creative" class="block hover:text-suav transition">Creative</a></li>
+  <li><a href="/philosophy" class="block hover:text-suav transition">Philosophy</a></li>
+  <li><a href="/contact" class="block hover:text-suav transition">Contact</a></li>
+</ul>
 </nav>
 
 <!-- Full-width Freedom34 Panel -->

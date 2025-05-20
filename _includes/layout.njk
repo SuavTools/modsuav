@@ -117,32 +117,53 @@
 
 <script>
   const toggleBtn = document.getElementById("freedomToggle");
+  const chevronIcon = document.getElementById("freedomChevron");
   const panel = document.getElementById("freedomPanel");
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
 
   let panelOpen = false;
+  let menuOpen = false;
 
-  toggleBtn?.addEventListener("click", () => {
-    panelOpen = !panelOpen;
-    panel.classList.toggle("hidden", !panelOpen);
+  // Mobile nav toggle
+  menuToggle?.addEventListener("click", () => {
+    menuOpen = !menuOpen;
+    navLinks.classList.toggle("hidden", !menuOpen);
   });
 
+  // Freedom34 flyout toggle
+  toggleBtn?.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevents accidental close
+    panelOpen = !panelOpen;
+    panel.classList.toggle("hidden", !panelOpen);
+    chevronIcon?.classList.toggle("rotate-180", panelOpen);
+  });
+
+  // Click outside to close panel
+  document.addEventListener("click", (e) => {
+    if (
+      panelOpen &&
+      !panel.contains(e.target) &&
+      !toggleBtn.contains(e.target)
+    ) {
+      panel.classList.add("hidden");
+      chevronIcon?.classList.remove("rotate-180");
+      panelOpen = false;
+    }
+  });
+
+  // ESC closes everything
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       panel.classList.add("hidden");
+      chevronIcon?.classList.remove("rotate-180");
+      navLinks.classList.add("hidden");
       panelOpen = false;
+      menuOpen = false;
     }
   });
-
-  document.addEventListener("click", (e) => {
-    if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) {
-      panel.classList.add("hidden");
-      panelOpen = false;
-    }
-  });
-
-
-
 </script>
+
 
 
 
