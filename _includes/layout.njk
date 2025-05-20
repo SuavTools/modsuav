@@ -26,11 +26,10 @@
 
 <!-- ✶ DESKTOP PANEL -->
 <div id="freedomPanelDesktop"
-  class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a]
-         border-t border-neutral-800 text-whisper font-mono text-sm z-50
-         overflow-y-auto transition-all duration-300 ease-out
-         opacity-0 -translate-y-2 pointer-events-none"
->
+  class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
+         text-whisper font-mono text-sm z-50 overflow-y-auto
+         opacity-0 pointer-events-none transform -translate-y-2
+         transition-all duration-300 ease-out">
 
   <div class="w-full max-w-6xl mx-auto px-6 md:px-12 py-12 flex justify-between gap-12">
     
@@ -234,34 +233,61 @@ const freedomToggleDesktop = document.getElementById("freedomToggleDesktop");
 const freedomPanelDesktop = document.getElementById("freedomPanelDesktop");
 const freedomChevronDesktop = document.getElementById("freedomChevronDesktop");
 
-let isDesktopPanelOpen = false;
 
-freedomToggleDesktop?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  isDesktopPanelOpen = !isDesktopPanelOpen;
 
-  freedomPanelDesktop.classList.toggle("opacity-0", !isDesktopPanelOpen);
-  freedomPanelDesktop.classList.toggle("pointer-events-none", !isDesktopPanelOpen);
-  freedomPanelDesktop.classList.toggle("-translate-y-2", !isDesktopPanelOpen);
-  freedomPanelDesktop.classList.toggle("translate-y-0", isDesktopPanelOpen);
 
-  freedomChevronDesktop?.classList.toggle("rotate-180", isDesktopPanelOpen);
-});
 
-// click outside closes it
+ //menu 
 document.addEventListener("click", (e) => {
-  if (
-    window.innerWidth >= 768 &&
-    isDesktopPanelOpen &&
-    !freedomPanelDesktop.contains(e.target) &&
-    !freedomToggleDesktop.contains(e.target)
-  ) {
-    isDesktopPanelOpen = false;
-    freedomPanelDesktop.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
-    freedomPanelDesktop.classList.remove("translate-y-0");
-    freedomChevronDesktop?.classList.remove("rotate-180");
+  const isInsidePanel = panel.contains(e.target);
+  const isToggleButton = toggleBtn.contains(e.target);
+
+  if (isOpen && !isInsidePanel && !isToggleButton) {
+    isOpen = false;
+    panel.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
+    panel.classList.remove("translate-y-0");
+    chevron?.classList.remove("rotate-180");
   }
 });
+
+const toggleBtn = document.getElementById("freedomToggleDesktop");
+const panel = document.getElementById("freedomPanelDesktop");
+const chevron = document.getElementById("freedomChevronDesktop");
+
+let isOpen = false;
+
+toggleBtn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  isOpen = !isOpen;
+
+  panel.classList.toggle("opacity-0", !isOpen);
+  panel.classList.toggle("pointer-events-none", !isOpen);
+  panel.classList.toggle("-translate-y-2", !isOpen);
+  panel.classList.toggle("translate-y-0", isOpen);
+
+  chevron?.classList.toggle("rotate-180", isOpen);
+});
+
+
+
+
+
+
+// Click outside to close
+document.addEventListener("click", (e) => {
+  if (
+    isOpen &&
+    !panel.contains(e.target) &&
+    !toggleBtn.contains(e.target)
+  ) {
+    isOpen = false;
+    panel.classList.add("opacity-0", "pointer-events-none", "-translate-y-2");
+    panel.classList.remove("translate-y-0");
+    chevron?.classList.remove("rotate-180");
+  }
+});
+
+
 
     //branches submenu 
 
