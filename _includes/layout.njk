@@ -12,7 +12,8 @@
     <div id="loader-message" class="opacity-70">initializing modsuav console</div>
   </div>
 
-    <!-- ✶ AUDIO -->
+  
+<!-- ✶ AUDIO -->
 <audio id="boot-sound" preload="auto">
   <source src="/intro.mp3" type="audio/mpeg" />
 </audio>
@@ -67,15 +68,21 @@
       "✶ ready"
     ];
 
-  const bootSound = document.getElementById("boot-sound");
-bootSound?.play().catch((err) => console.log("boot sound failed", err));
+// Get audio element once
+const bootSound = document.getElementById("boot-sound");
 
-    // Attempt autoplay
-    bootSound?.play().catch(() => {
-      window.addEventListener("click", () => {
-        bootSound?.play().catch(() => {});
-      }, { once: true });
-    });
+// Try autoplay (might fail silently)
+bootSound?.play().catch((err) => {
+  console.log("Autoplay blocked, waiting for user interaction:", err);
+});
+
+// Add a one-time listener for any user click to trigger audio
+window.addEventListener("click", () => {
+  bootSound?.play().catch(err => {
+    console.warn("Manual playback failed:", err);
+  });
+}, { once: true });
+
 
     if (!sessionStorage.getItem("modsuavLoaded")) {
       sessionStorage.setItem("modsuavLoaded", "true");
