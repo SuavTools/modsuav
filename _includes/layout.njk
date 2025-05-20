@@ -26,9 +26,12 @@
 
 <!-- ✶ DESKTOP PANEL -->
 <div
+<div
   id="freedomPanelDesktop"
-  class="hidden fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
-         text-whisper font-mono text-sm z-50 transition-all duration-300 ease-in-out overflow-y-auto"
+  class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
+         text-whisper font-mono text-sm z-50 overflow-y-auto
+         opacity-0 -translate-y-2 pointer-events-none
+         transition-all duration-300 ease-out"
 >
   <div class="w-full px-6 md:px-12 py-12">
     <div class="flex flex-col md:flex-row justify-between gap-12 max-w-6xl mx-auto">
@@ -170,11 +173,23 @@
         const freedomPanelDesktop = document.getElementById("freedomPanelDesktop");
         const freedomChevronDesktop = document.getElementById("freedomChevronDesktop");
 
-        freedomToggleDesktop?.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const open = freedomPanelDesktop.classList.toggle("hidden");
-          freedomChevronDesktop?.classList.toggle("rotate-180", open);
-        });
+
+
+freedomToggleDesktop?.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  const isOpen = freedomPanelDesktop.classList.contains("opacity-100");
+
+  freedomPanelDesktop.classList.toggle("opacity-100", !isOpen);
+  freedomPanelDesktop.classList.toggle("opacity-0", isOpen);
+  freedomPanelDesktop.classList.toggle("pointer-events-none", isOpen);
+  freedomPanelDesktop.classList.toggle("-translate-y-2", isOpen);
+  freedomPanelDesktop.classList.toggle("translate-y-0", !isOpen);
+
+  freedomChevronDesktop?.classList.toggle("rotate-180", !isOpen);
+});
+
+
 
         // Click outside closes desktop flyout
         document.addEventListener("click", (e) => {
