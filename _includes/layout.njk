@@ -81,7 +81,22 @@ window.addEventListener("click", () => {
   bootSound?.play().catch(err => {
     console.warn("Manual playback failed:", err);
   });
+
+  // Show message
+  const clickMessage = document.getElementById("click-message");
+  if (clickMessage) {
+    clickMessage.classList.remove("opacity-0");
+    clickMessage.classList.add("opacity-100");
+
+    // Optional: fade out after 3.5s
+    setTimeout(() => {
+      clickMessage.classList.add("opacity-0");
+    }, 3500);
+  }
 }, { once: true });
+
+
+
 
 
     if (!sessionStorage.getItem("modsuavLoaded")) {
