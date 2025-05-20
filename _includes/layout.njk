@@ -67,7 +67,8 @@
       "✶ ready"
     ];
 
-    const bootSound = document.getElementById("boot-sound");
+  const bootSound = document.getElementById("boot-sound");
+bootSound?.play().catch((err) => console.log("boot sound failed", err));
 
     // Attempt autoplay
     bootSound?.play().catch(() => {
