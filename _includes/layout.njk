@@ -2,38 +2,63 @@
 
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-<nav class="p-4 bg-[#111111] flex justify-between items-center">
-  <!-- Left: Logo + Brand -->
-  <div class="flex items-center gap-3">
-    <img src="/public/logo.svg" alt="SUAV logo" class="h-6 w-6" />
-    <span class="text-whisper font-bold tracking-wide text-lg">modsuav*</span>
+  <!-- ✶ LOADING SCREEN -->
+  <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center space-y-2 text-sm font-mono transition-opacity duration-500">
+    <span class="animate-pulse">✶ linking to grove tree...</span>
+    <span class="opacity-60">initializing modsuav console</span>
+    <span class="opacity-40 text-suav">syncing memory...</span>
   </div>
 
-  <!-- Right: Navigation -->
-  <ul class="flex gap-6 text-sm font-medium relative items-center">
-    <li><a href="/" class="hover:text-suav transition">Início</a></li>
+  <!-- ✶ NAVIGATION -->
+  <nav class="p-4 bg-[#111111] flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="/logo.svg" alt="SUAV logo" class="h-6 w-6" />
+      <span class="text-whisper font-bold tracking-wide text-lg">modsuav*</span>
+    </div>
+    <ul class="flex gap-6 text-sm font-medium relative items-center">
+      <li><a href="/" class="hover:text-suav transition">Início</a></li>
+      <li class="group relative">
+        <button class="hover:text-suav transition">Freedom34</button>
+        <div class="absolute hidden group-hover:flex flex-col bg-backdrop border border-whisper mt-2 p-2 w-44 z-20 shadow-xl">
+          <a href="/plugins" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Plugins</a>
+          <a href="/branches" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Branches</a>
+          <a href="/docs" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Docs</a>
+        </div>
+      </li>
+      <li><a href="/creative" class="hover:text-suav transition">Creative</a></li>
+      <li><a href="/philosophy" class="hover:text-suav transition">Philosophy</a></li>
+      <li><a href="/contact" class="hover:text-suav transition">Contact</a></li>
+    </ul>
+  </nav>
 
-<li class="group relative">
-  <button class="hover:text-suav transition">Freedom34</button>
-  <div class="absolute hidden group-hover:flex flex-col bg-backdrop border border-whisper mt-2 p-2 w-44 z-20 shadow-xl">
-    <a href="/plugins" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Plugins</a>
-    <a href="/branches" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Branches</a>
-    <a href="/docs" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Docs</a>
-  </div>
-</li>
+  <!-- ✶ MAIN CONTENT -->
+  <main class="flex-1">
+    <section class="max-w-4xl mx-auto px-6 py-24">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-suav mb-6">
+        SUAV Console Labs
+      </h1>
+      <p class="text-lg text-whisper/80 leading-relaxed">
+        Soul-coded infrastructure for artists, studios, and systems that don’t shout.
+      </p>
+    </section>
+  </main>
 
-    <li><a href="/creative" class="hover:text-suav transition">Creative</a></li>
-    <li><a href="/philosophy" class="hover:text-suav transition">Philosophy</a></li>
-    <li><a href="/contact" class="hover:text-suav transition">Contact</a></li>
-  </ul>
-</nav>
+  <!-- ✶ FOOTER -->
+  <footer class="mt-auto border-t border-[#1a1a1a] py-6 text-center text-sm text-whisper/40">
+    tudo que levo, devolvo com alma. <span class="text-whisper">assinatura: marcada na dobra do tempo</span>
+  </footer>
 
-<section class="max-w-4xl mx-auto px-6 py-24">
-  <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-suav mb-6">
-    SUAV Console Labs
-  </h1>
-  <p class="text-lg text-whisper/80 leading-relaxed">
-    Soul-coded infrastructure for artists, studios, and systems that don’t shout.
-  </p>
-</section>
+  <!-- ✶ LOADER SCRIPT -->
+  <script>
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      if (loader) {
+        loader.classList.add("opacity-0");
+        setTimeout(() => loader.remove(), 600);
+      }
+    });
+  </script>
+
+</body>
+
 
