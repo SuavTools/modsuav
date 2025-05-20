@@ -2,12 +2,13 @@
 
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-  <!-- ✶ LOADING SCREEN -->
-  <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center space-y-2 text-sm font-mono transition-opacity duration-[1200ms]">
-    <span class="animate-pulse">✶ linking to grove tree...</span>
-    <span class="opacity-60">initializing modsuav console</span>
-    <span class="opacity-40 text-suav">syncing memory...</span>
+  <!-- ✶ LOADER (shows immediately) -->
+<div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
+  <div class="text-suav animate-pulse">
+    ✶ <span id="dot-sequence">.</span>
   </div>
+  <div id="loader-message" class="opacity-70">initializing modsuav console</div>
+</div>
 
   <!-- ✶ NAVIGATION -->
   <nav class="p-4 bg-[#111111] flex justify-between items-center">
@@ -50,13 +51,45 @@
 
   <!-- ✶ LOADER SCRIPT -->
 <script>
-  window.addEventListener("load", () => {
+  const messages = [
+    "initializing modsuav console",
+    "linking to grove tree",
+    "calibrating soul-interface",
+    "establishing frequency sync",
+    "syncing encrypted memory",
+    "✶ ready"
+  ];
+
+  let messageIndex = 0;
+  const loaderMessage = document.getElementById("loader-message");
+  const dotSequence = document.getElementById("dot-sequence");
+
+  // animate dots
+  let dotState = 0;
+  const dots = [".", "..", "..."];
+  setInterval(() => {
+    dotState = (dotState + 1) % dots.length;
+    dotSequence.textContent = dots[dotState];
+  }, 400);
+
+  // cycle messages
+  const messageTimer = setInterval(() => {
+    messageIndex++;
+    if (messageIndex >= messages.length) {
+      clearInterval(messageTimer);
+      return;
+    }
+    loaderMessage.textContent = messages[messageIndex];
+  }, 1300);
+
+  // fade out after final message
+  setTimeout(() => {
     const loader = document.getElementById("loader");
     if (loader) {
       loader.classList.add("opacity-0");
-      setTimeout(() => loader.remove(), 1600); // ← Slowed to 1.6s
+      setTimeout(() => loader.remove(), 1000);
     }
-  });
+  }, 1300 * (messages.length + 1)); // hold for full sequence
 </script>
 
 </body>
