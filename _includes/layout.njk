@@ -16,6 +16,10 @@
       <div id="loader-message" class="opacity-70">initializing modsuav console</div>
     </div>
 
+        <!-- ✶ AUDIO -->
+    <audio id="boot-sound" preload="auto">
+      <source src="/intro.mp3" type="audio/mpeg" />
+    </audio>
 
 
     {% include "nav.njk" %}
@@ -103,6 +107,72 @@
           branchesChevronDesktop?.classList.toggle("rotate-180", open);
         });
       });
+
+
+
+
+    <!-- ✶ CONSOLE SCRIPT -->
+    <script>
+      // LOADER SEQUENCE
+      const messages = [
+        "initializing modsuav console",
+        "linking to grove tree",
+        "calibrating soul-interface",
+        "establishing frequency sync",
+        "syncing encrypted memory",
+        "✶ ready"
+      ];
+      const bootSound = document.getElementById("boot-sound");
+      bootSound?.play().catch(err => console.log("Autoplay blocked", err));
+      let hasUserClicked = false;
+      window.addEventListener("click", () => {
+        if (hasUserClicked) return;
+        hasUserClicked = true;
+        bootSound?.play().catch(err => console.warn("Manual playback failed:", err));
+        const clickMessage = document.getElementById("click-message");
+        clickMessage?.classList.remove("opacity-0");
+        clickMessage?.classList.add("opacity-100");
+        setTimeout(() => {
+          clickMessage?.classList.remove("opacity-100");
+          clickMessage?.classList.add("opacity-0");
+        }, 3500);
+      }, { once: true });
+      if (!sessionStorage.getItem("modsuavLoaded")) {
+        sessionStorage.setItem("modsuavLoaded", "true");
+        let messageIndex = 0;
+        const loaderMessage = document.getElementById("loader-message");
+        const dotSequence = document.getElementById("dot-sequence");
+        const dots = [".", "..", "..."];
+        let dotState = 0;
+        const dotTimer = setInterval(() => {
+          dotState = (dotState + 1) % dots.length;
+          dotSequence.textContent = dots[dotState];
+        }, 300);
+        const messageDelay = 500;
+        const messageTimer = setInterval(() => {
+          messageIndex++;
+          if (messageIndex >= messages.length) {
+            clearInterval(messageTimer);
+            clearInterval(dotTimer);
+            return;
+          }
+          loaderMessage.textContent = messages[messageIndex];
+        }, messageDelay);
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          loader?.classList.add("opacity-0");
+          setTimeout(() => loader?.remove(), 600);
+        }, messageDelay * (messages.length + 1));
+      } else {
+        document.getElementById("loader")?.remove();
+      }
+    </script>
+
+
+
+
+
+
     </script>
   </body>
 </html>
