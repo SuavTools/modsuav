@@ -170,7 +170,58 @@
       });
 
 
+// 🍔 Mobile Menu Toggle
+const menuToggle = document.getElementById("menuToggle");
+const navOverlay = document.getElementById("navOverlay");
 
+menuToggle?.addEventListener("click", () => {
+  const open = navOverlay.classList.toggle("hidden");
+  document.body.style.overflow = open ? "" : "hidden";
+});
+
+// 📁 Mobile Freedom34 Flyout
+const freedomToggleMobile = document.getElementById("freedomToggleMobile");
+const freedomPanelMobile = document.getElementById("freedomPanelMobile");
+const freedomChevronMobile = document.getElementById("freedomChevronMobile");
+
+freedomToggleMobile?.addEventListener("click", () => {
+  const open = freedomPanelMobile.classList.toggle("hidden");
+  freedomChevronMobile?.classList.toggle("rotate-180", open);
+});
+
+// 🌿 Mobile Branches Flyout
+const branchesToggleMobile = document.getElementById("branchesToggleMobile");
+const branchesPanelMobile = document.getElementById("branchesPanelMobile");
+const branchesChevronMobile = document.getElementById("branchesChevronMobile");
+
+branchesToggleMobile?.addEventListener("click", () => {
+  const open = branchesPanelMobile.classList.toggle("hidden");
+  branchesChevronMobile?.classList.toggle("rotate-180", open);
+});
+
+// 🧹 Close all mobile menus on link click
+document.querySelectorAll("#navOverlay a").forEach(link => {
+  link.addEventListener("click", () => {
+    navOverlay?.classList.add("hidden");
+    document.body.style.overflow = "";
+    freedomPanelMobile?.classList.add("hidden");
+    freedomChevronMobile?.classList.remove("rotate-180");
+    branchesPanelMobile?.classList.add("hidden");
+    branchesChevronMobile?.classList.remove("rotate-180");
+  });
+});
+
+// ⎋ ESC closes all overlays
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    navOverlay?.classList.add("hidden");
+    document.body.style.overflow = "";
+    freedomPanelMobile?.classList.add("hidden");
+    freedomChevronMobile?.classList.remove("rotate-180");
+    branchesPanelMobile?.classList.add("hidden");
+    branchesChevronMobile?.classList.remove("rotate-180");
+  }
+});
 
 
 
