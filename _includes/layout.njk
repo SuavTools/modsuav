@@ -64,6 +64,47 @@
 
 
 
+
+
+
+    <!-- ✶ MOBILE NAV OVERLAY and footer/scripts assumed below -->
+
+<!-- ✶ MOBILE NAV OVERLAY -->
+<div id="navOverlay" class="hidden fixed inset-0 bg-[#0a0a0a] text-whisper z-50 px-6 py-8 space-y-6 text-lg overflow-y-auto md:hidden">
+  <a href="/" class="block">Início</a>
+
+  <button id="freedomToggleMobile" class="flex items-center gap-1 w-full text-left">
+    Freedom34
+    <svg id="freedomChevronMobile" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div id="freedomPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+    <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
+    <!-- 🌿 Mobile branches submenu -->
+    <button id="branchesToggleMobile" class="flex items-center gap-1 w-full text-left">
+      Branches
+      <svg id="branchesChevronMobile" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <div id="branchesPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+      <a href="/branches/figma-tools" class="block text-base">Figma Tools</a>
+      <a href="/branches/webflow-ghl" class="block text-base">Webflow → GHL</a>
+      <a href="/branches/api-access" class="block text-base">API Access</a>
+    </div>
+    <a href="/docs" class="block text-base">Docs</a>
+  </div>
+
+  <a href="/creative" class="block">Creative</a>
+  <a href="/philosophy" class="block">Philosophy</a>
+  <a href="/contact" class="block">Contact</a>
+</div>
+
+
+
+
+
     <!-- ✶ CONSOLE SCRIPT -->
     <script>
       // LOADER SEQUENCE
@@ -126,7 +167,13 @@
 
 
 
-    <!-- ✶ MOBILE NAV OVERLAY and footer/scripts assumed below -->
+
+
+
+
+
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
