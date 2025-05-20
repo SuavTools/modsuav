@@ -21,6 +21,10 @@
 
     {% include "nav.njk" %}
 
+
+    <!-- ✶ Content from child templates -->
+    {{ content | safe }}
+
     <!-- ✶ DESKTOP PANEL -->
     <div id="freedomPanelDesktop"
       class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
@@ -103,6 +107,7 @@
 
 
 
+{% include "footer.njk" %}
 
 
     <!-- ✶ CONSOLE SCRIPT -->
