@@ -141,30 +141,39 @@
   document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ DOM fully loaded");
 
+    // ✶ Element References
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
+    const navOverlay = document.getElementById("navOverlay"); // Optional if you go full overlay
     const toggleBtn = document.getElementById("freedomToggle");
     const chevronIcon = document.getElementById("freedomChevron");
     const panel = document.getElementById("freedomPanel");
 
+    // 🧠 Debug warnings
     if (!menuToggle) console.warn("⚠️ menuToggle not found");
     if (!navLinks) console.warn("⚠️ navLinks not found");
     if (!toggleBtn) console.warn("⚠️ freedomToggle not found");
     if (!panel) console.warn("⚠️ freedomPanel not found");
 
-    // 🍔 Mobile Menu
+    // 🍔 Mobile Menu Toggle
     menuToggle?.addEventListener("click", () => {
       console.log("🍔 Hamburger clicked");
-      navLinks?.classList.toggle("hidden");
 
+      // For simple dropdown:
+      navLinks?.classList.toggle("hidden");
       const isOpen = !navLinks?.classList.contains("hidden");
       document.body.style.overflow = isOpen ? "hidden" : "";
+
+      // If using #navOverlay instead of #navLinks
+      // const isOpen = navOverlay?.classList.toggle("hidden");
+      // document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
-    // ✶ Freedom34 Flyout
+    // ✶ Freedom34 Flyout Toggle
     toggleBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
       console.log("✶ Freedom34 clicked");
+
       panel?.classList.toggle("hidden");
       chevronIcon?.classList.toggle("rotate-180");
 
@@ -172,23 +181,24 @@
       document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
-    // 🧹 Auto-collapse mobile nav when link clicked
+    // 🧹 Close nav on mobile link click
     document.querySelectorAll("#navLinks a").forEach(link => {
       link.addEventListener("click", () => {
         if (window.innerWidth < 768 && !navLinks?.classList.contains("hidden")) {
           navLinks.classList.add("hidden");
           document.body.style.overflow = "";
-          console.log("🧹 Mobile nav closed on link click");
+          console.log("🧹 Closed mobile nav on link tap");
         }
       });
     });
 
-    // ESC to close both
+    // ⎋ ESC to close all
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         navLinks?.classList.add("hidden");
         panel?.classList.add("hidden");
         chevronIcon?.classList.remove("rotate-180");
+        navOverlay?.classList?.add("hidden"); // optional
         document.body.style.overflow = "";
       }
     });
