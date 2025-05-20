@@ -2,7 +2,9 @@
 
 <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-
+<p id="click-message" class="text-xs text-center text-suav/60 mt-4 opacity-0 transition-opacity duration-500">
+  ✶ connection verified
+</p>
 
   <!-- ✶ LOADER -->
   <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
@@ -76,20 +78,22 @@ bootSound?.play().catch((err) => {
   console.log("Autoplay blocked, waiting for user interaction:", err);
 });
 
-// Add a one-time listener for any user click to trigger audio
+// Only run once
 window.addEventListener("click", () => {
   bootSound?.play().catch(err => {
     console.warn("Manual playback failed:", err);
   });
 
-  // Show message
   const clickMessage = document.getElementById("click-message");
+
   if (clickMessage) {
+    // Make message visible
     clickMessage.classList.remove("opacity-0");
     clickMessage.classList.add("opacity-100");
 
-    // Optional: fade out after 3.5s
+    // Optional: fade it out after 3.5s
     setTimeout(() => {
+      clickMessage.classList.remove("opacity-100");
       clickMessage.classList.add("opacity-0");
     }, 3500);
   }
