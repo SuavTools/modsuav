@@ -9,56 +9,43 @@
 
   <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
-
-
     <!-- ✶ LOADER -->
     <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
-      <div class="text-suav animate-pulse">
-        ✶ <span id="dot-sequence">.</span>
-      </div>
+      <div class="text-suav animate-pulse">✶ <span id="dot-sequence">.</span></div>
       <div id="loader-message" class="opacity-70">initializing modsuav console</div>
     </div>
-
-
 
     <!-- ✶ AUDIO -->
     <audio id="boot-sound" preload="auto">
       <source src="/intro.mp3" type="audio/mpeg" />
     </audio>
 
+    <!-- ✶ DESKTOP NAV -->
+    {% include "nav.njk" %}
 
+    <!-- ✶ MOBILE OVERLAY NAV (md:hidden) -->
+    <div id="navOverlay"
+      class="hidden fixed inset-0 bg-[#0a0a0a] text-whisper z-50 px-6 py-8 space-y-6 text-lg overflow-y-auto md:hidden"
+    >
+      <a href="/" class="block">Início</a>
 
-  <!-- ✶ NAV -->
-{% include "nav.njk" %}
+      <!-- Mobile Freedom34 Flyout -->
+      <button id="freedomToggleMobile" class="flex items-center gap-1 w-full text-left">
+        Freedom34
+        <svg id="freedomChevronMobile" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div id="freedomPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+        <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
+        <a href="/branches" class="block text-base">Branches</a>
+        <a href="/docs" class="block text-base">Docs</a>
+      </div>
 
-<!-- ✶ MOBILE OVERLAY NAV (hidden on desktop) -->
-<div id="navOverlay"
-  class="hidden fixed inset-0 bg-[#0a0a0a] text-whisper z-50 px-6 py-8 space-y-6 text-lg overflow-y-auto md:hidden"
->
-  <a href="/" class="block">Início</a>
-
-  <button id="freedomToggle" class="flex items-center gap-1 w-full text-left">
-    Freedom34
-    <svg id="freedomChevron" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  </button>
-
-  <div id="freedomPanel" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
-    <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
-    <a href="/branches" class="block text-base">Branches</a>
-    <a href="/docs" class="block text-base">Docs</a>
-  </div>
-
-  <a href="/creative" class="block">Creative</a>
-  <a href="/philosophy" class="block">Philosophy</a>
-  <a href="/contact" class="block">Contact</a>
-</div>
-
-
-
-
-
+      <a href="/creative" class="block">Creative</a>
+      <a href="/philosophy" class="block">Philosophy</a>
+      <a href="/contact" class="block">Contact</a>
+    </div>
 
     <!-- ✶ CLICK MESSAGE -->
     <p id="click-message" class="text-xs text-center text-suav/60 mt-4 opacity-0 transition-opacity duration-500">
@@ -75,6 +62,7 @@
 
     <!-- ✶ CONSOLE SCRIPT -->
     <script>
+      // Loader logic
       const messages = [
         "initializing modsuav console",
         "linking to grove tree",
@@ -104,7 +92,6 @@
         if (clickMessage) {
           clickMessage.classList.remove("opacity-0");
           clickMessage.classList.add("opacity-100");
-
           setTimeout(() => {
             clickMessage.classList.remove("opacity-100");
             clickMessage.classList.add("opacity-0");
@@ -114,7 +101,6 @@
 
       if (!sessionStorage.getItem("modsuavLoaded")) {
         sessionStorage.setItem("modsuavLoaded", "true");
-
         let messageIndex = 0;
         const loaderMessage = document.getElementById("loader-message");
         const dotSequence = document.getElementById("dot-sequence");
@@ -149,57 +135,78 @@
       }
     </script>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 🍔 Mobile nav toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const navOverlay = document.getElementById("navOverlay");
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.getElementById("menuToggle");
-    const navOverlay = document.getElementById("navOverlay");
-    const freedomToggle = document.getElementById("freedomToggle");
-    const freedomPanel = document.getElementById("freedomPanel");
-    const freedomChevron = document.getElementById("freedomChevron");
+        menuToggle?.addEventListener("click", () => {
+          const isOpen = navOverlay.classList.toggle("hidden");
+          document.body.style.overflow = isOpen ? "" : "hidden";
+        });
 
-    // 🍔 Toggle overlay menu
-    menuToggle?.addEventListener("click", () => {
-      const isOpen = navOverlay.classList.toggle("hidden");
-      document.body.style.overflow = isOpen ? "" : "hidden";
-    });
+        // ✶ Mobile Freedom34 flyout
+        const freedomToggleMobile = document.getElementById("freedomToggleMobile");
+        const freedomPanelMobile = document.getElementById("freedomPanelMobile");
+        const freedomChevronMobile = document.getElementById("freedomChevronMobile");
 
-    // ✶ Toggle Freedom34 panel
-    freedomToggle?.addEventListener("click", () => {
-      const open = freedomPanel.classList.toggle("hidden");
-      freedomChevron?.classList.toggle("rotate-180", open);
-    });
+        freedomToggleMobile?.addEventListener("click", () => {
+          const open = freedomPanelMobile.classList.toggle("hidden");
+          freedomChevronMobile?.classList.toggle("rotate-180", open);
+        });
 
-    // ⎋ ESC closes everything
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        navOverlay?.classList.add("hidden");
-        freedomPanel?.classList.add("hidden");
-        freedomChevron?.classList.remove("rotate-180");
-        document.body.style.overflow = "";
-      }
-    });
+        // ✶ Desktop Freedom34 flyout
+        const freedomToggleDesktop = document.getElementById("freedomToggleDesktop");
+        const freedomPanelDesktop = document.getElementById("freedomPanelDesktop");
+        const freedomChevronDesktop = document.getElementById("freedomChevronDesktop");
 
-    // 🧹 Close overlay on link click
-    document.querySelectorAll("#navOverlay a").forEach(link => {
-      link.addEventListener("click", () => {
-        navOverlay?.classList.add("hidden");
-        freedomPanel?.classList.add("hidden");
-        freedomChevron?.classList.remove("rotate-180");
-        document.body.style.overflow = "";
+        freedomToggleDesktop?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = freedomPanelDesktop.classList.toggle("hidden");
+          freedomChevronDesktop?.classList.toggle("rotate-180", open);
+        });
+
+        // Close desktop dropdown on outside click
+        document.addEventListener("click", (e) => {
+          if (
+            !freedomPanelDesktop?.contains(e.target) &&
+            !freedomToggleDesktop?.contains(e.target)
+          ) {
+            freedomPanelDesktop?.classList.add("hidden");
+            freedomChevronDesktop?.classList.remove("rotate-180");
+          }
+        });
+
+        // ESC closes everything
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            navOverlay?.classList.add("hidden");
+            document.body.style.overflow = "";
+
+            freedomPanelMobile?.classList.add("hidden");
+            freedomChevronMobile?.classList.remove("rotate-180");
+
+            freedomPanelDesktop?.classList.add("hidden");
+            freedomChevronDesktop?.classList.remove("rotate-180");
+          }
+        });
+
+        // Close mobile overlay on link tap
+        document.querySelectorAll("#navOverlay a").forEach(link => {
+          link.addEventListener("click", () => {
+            navOverlay?.classList.add("hidden");
+            freedomPanelMobile?.classList.add("hidden");
+            freedomChevronMobile?.classList.remove("rotate-180");
+            document.body.style.overflow = "";
+          });
+        });
       });
-    });
-  });
-</script>
-
-
-
-
-
-
+    </script>
 
   </body>
 </html>
+
 
 
 
