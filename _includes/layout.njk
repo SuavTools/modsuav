@@ -24,51 +24,48 @@
     {% include "nav.njk" %}
 
 
-<!-- ✶ DESKTOP PANEL -->
-<div id="freedomPanelDesktop"
+<div
+  id="freedomPanelDesktop"
   class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
          text-whisper font-mono text-sm z-50 overflow-y-auto
          opacity-0 -translate-y-2 pointer-events-none
          transition-all duration-300 ease-out"
 >
-
-<div class="w-full px-6 md:px-12 py-12">
-  <div class="flex flex-col md:flex-row justify-between items-start gap-12 max-w-6xl mx-auto">
-    
-    <!-- LEFT -->
-    <div class="space-y-3 max-w-xl flex-1">
-      <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
-      <p class="opacity-80 leading-snug">
-        Soul-coded tools for artists and studios. No roadmap. Just resonance.
-      </p>
-      <p class="text-xs text-neutral-500">
-        Everything here hums quietly until called.
-      </p>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="space-y-2 w-48">
-      <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
-
-      <!-- ✶ Branches Submenu -->
-      <button id="branchesToggleDesktop" class="block w-full text-left hover:text-suav transition flex items-center gap-1">
-        Branches
-        <svg id="branchesChevronDesktop" class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      <div id="branchesPanelDesktop" class="hidden ml-2 mt-2 border-l border-neutral-700 space-y-2 pl-4 text-sm">
-        <a href="/branches/figma-tools" class="block hover:text-suav transition">Figma Tools</a>
-        <a href="/branches/webflow-ghl" class="block hover:text-suav transition">Webflow → GHL</a>
-        <a href="/branches/api-access" class="block hover:text-suav transition">API Access</a>
+  <!-- MATCHES NAV CONTAINER WIDTH -->
+  <div class="max-w-6xl mx-auto px-6 md:px-12 py-12">
+    <div class="flex flex-col md:flex-row justify-between gap-12">
+      <!-- Left -->
+      <div class="space-y-3 max-w-xl">
+        <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
+        <p class="opacity-80 leading-snug">
+          Soul-coded tools for artists and studios. No roadmap. Just resonance.
+        </p>
+        <p class="text-xs text-neutral-500">
+          Everything here hums quietly until called.
+        </p>
       </div>
 
-      <a href="/docs" class="block hover:text-suav transition">Docs</a>
+      <!-- Right -->
+      <div class="space-y-2">
+        <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
+
+        <button id="branchesToggleDesktop" class="block w-full text-left hover:text-suav transition flex items-center gap-1">
+          Branches
+          <svg id="branchesChevronDesktop" class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div id="branchesPanelDesktop" class="hidden ml-2 mt-2 border-l border-neutral-700 space-y-2 pl-4 text-sm">
+          <a href="/branches/figma-tools" class="block hover:text-suav transition">Figma Tools</a>
+          <a href="/branches/webflow-ghl" class="block hover:text-suav transition">Webflow → GHL</a>
+          <a href="/branches/api-access" class="block hover:text-suav transition">API Access</a>
+        </div>
+
+        <a href="/docs" class="block hover:text-suav transition">Docs</a>
+      </div>
     </div>
   </div>
-</div>
-
 </div>
 
 
