@@ -25,6 +25,8 @@
 
 
 <!-- ✶ DESKTOP PANEL -->
+
+
 <div
 <div id="freedomPanelDesktop"
   class="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-[#0a0a0a] border-t border-neutral-800
@@ -45,11 +47,33 @@
         </p>
       </div>
 
+
+
       <!-- Right -->
       <div class="space-y-2">
+       
+       
         <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
-        <a href="/branches" class="block hover:text-suav transition">Branches</a>
+
+       
+        <!-- ✶ Branches Submenu -->
+<button id="branchesToggleDesktop" class="block w-full text-left hover:text-suav transition flex items-center gap-1">
+  Branches
+  <svg id="branchesChevronDesktop" class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+  </svg>
+</button>
+
+<div id="branchesPanelDesktop" class="hidden ml-2 mt-2 border-l border-neutral-700 space-y-2 pl-4 text-sm">
+  <a href="/branches/figma-tools" class="block hover:text-suav transition">Figma Tools</a>
+  <a href="/branches/webflow-ghl" class="block hover:text-suav transition">Webflow → GHL</a>
+  <a href="/branches/api-access" class="block hover:text-suav transition">API Access</a>
+</div>
+
+
         <a href="/docs" class="block hover:text-suav transition">Docs</a>
+
+
       </div>
     </div>
   </div>
@@ -187,6 +211,18 @@
   // Chevron rotation
   freedomChevronDesktop?.classList.toggle("rotate-180", !isOpen);
 });
+
+    //branches submenu 
+
+const branchesToggleDesktop = document.getElementById("branchesToggleDesktop");
+const branchesPanelDesktop = document.getElementById("branchesPanelDesktop");
+const branchesChevronDesktop = document.getElementById("branchesChevronDesktop");
+
+branchesToggleDesktop?.addEventListener("click", () => {
+  const open = branchesPanelDesktop.classList.toggle("hidden");
+  branchesChevronDesktop?.classList.toggle("rotate-180", open);
+});
+
 
         // Click outside closes desktop flyout
         document.addEventListener("click", (e) => {
