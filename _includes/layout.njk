@@ -38,7 +38,7 @@
     <div class="flex flex-col md:flex-row justify-between gap-12 max-w-6xl mx-auto">
       <!-- Left -->
       <div class="space-y-3 max-w-xl">
-        <h2 class="text-xl font-bold text-suav">MODSUAV Console Labs</h2>
+        <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
         <p class="opacity-80 leading-snug">
           Soul-coded tools for artists and studios. No roadmap. Just resonance.
         </p>
@@ -98,7 +98,7 @@
       <div id="freedomPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
         <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
 
-
+        
         <!-- ✶ Mobile Branches Flyout -->
 <button id="branchesToggleMobile" class="flex items-center gap-1 w-full text-left">
   Branches
@@ -219,16 +219,6 @@
           const open = freedomPanelMobile.classList.toggle("hidden");
           freedomChevronMobile?.classList.toggle("rotate-180", open);
         });
-
-        // ✶ Mobile Branches flyout
-const branchesToggleMobile = document.getElementById("branchesToggleMobile");
-const branchesPanelMobile = document.getElementById("branchesPanelMobile");
-const branchesChevronMobile = document.getElementById("branchesChevronMobile");
-
-branchesToggleMobile?.addEventListener("click", () => {
-  const open = branchesPanelMobile.classList.toggle("hidden");
-  branchesChevronMobile?.classList.toggle("rotate-180", open);
-});
 
 
 
