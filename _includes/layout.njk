@@ -56,6 +56,8 @@
         <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
 
        
+
+
         <!-- ✶ Branches Submenu -->
 <button id="branchesToggleDesktop" class="block w-full text-left hover:text-suav transition flex items-center gap-1">
   Branches
@@ -69,6 +71,9 @@
   <a href="/branches/webflow-ghl" class="block hover:text-suav transition">Webflow → GHL</a>
   <a href="/branches/api-access" class="block hover:text-suav transition">API Access</a>
 </div>
+
+
+
 
 
         <a href="/docs" class="block hover:text-suav transition">Docs</a>
@@ -91,14 +96,52 @@
         </svg>
       </button>
       <div id="freedomPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+       
+       
+       
+       
         <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
-        <a href="/branches" class="block text-base">Branches</a>
+        
+        
+        
+
+        
+        <!-- ✶ Mobile Branches Flyout -->
+
+<button id="branchesToggleMobile" class="flex items-center gap-1 w-full text-left">
+  Branches
+  <svg id="branchesChevronMobile" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+  </svg>
+</button>
+<div id="branchesPanelMobile" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+  <a href="/branches/figma-tools" class="block text-base">Figma Tools</a>
+  <a href="/branches/webflow-ghl" class="block text-base">Webflow → GHL</a>
+  <a href="/branches/api-access" class="block text-base">API Access</a>
+</div>
+
+
+
+
+
         <a href="/docs" class="block text-base">Docs</a>
+
+
+
+
       </div>
       <a href="/creative" class="block">Creative</a>
       <a href="/philosophy" class="block">Philosophy</a>
       <a href="/contact" class="block">Contact</a>
     </div>
+
+
+
+
+
+
+
+
 
     <!-- ✶ CLICK MESSAGE -->
     <p id="click-message" class="text-xs text-center text-suav/60 mt-4 opacity-0 transition-opacity duration-500">
@@ -181,15 +224,31 @@
           document.body.style.overflow = isOpen ? "" : "hidden";
         });
 
+        
         // ✶ Mobile Freedom34 flyout
-        const freedomToggleMobile = document.getElementById("freedomToggleMobile");
-        const freedomPanelMobile = document.getElementById("freedomPanelMobile");
-        const freedomChevronMobile = document.getElementById("freedomChevronMobile");
 
-        freedomToggleMobile?.addEventListener("click", () => {
-          const open = freedomPanelMobile.classList.toggle("hidden");
-          freedomChevronMobile?.classList.toggle("rotate-180", open);
-        });
+const branchesToggleMobile = document.getElementById("branchesToggleMobile");
+const branchesPanelMobile = document.getElementById("branchesPanelMobile");
+const branchesChevronMobile = document.getElementById("branchesChevronMobile");
+
+branchesToggleMobile?.addEventListener("click", () => {
+  const open = branchesPanelMobile.classList.toggle("hidden");
+  branchesChevronMobile?.classList.toggle("rotate-180", open);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // ✶ Desktop Freedom34 flyout
         const freedomToggleDesktop = document.getElementById("freedomToggleDesktop");
