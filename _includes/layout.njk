@@ -9,6 +9,8 @@
 
   <body class="min-h-screen flex flex-col bg-backdrop text-whisper font-sans antialiased">
 
+
+
     <!-- ✶ LOADER -->
     <div id="loader" class="fixed inset-0 z-50 bg-backdrop text-whisper flex flex-col items-center justify-center text-sm font-mono transition-opacity duration-1000 space-y-1 tracking-tight">
       <div class="text-suav animate-pulse">
@@ -17,35 +19,46 @@
       <div id="loader-message" class="opacity-70">initializing modsuav console</div>
     </div>
 
+
+
     <!-- ✶ AUDIO -->
     <audio id="boot-sound" preload="auto">
       <source src="/intro.mp3" type="audio/mpeg" />
     </audio>
 
+
+
   <!-- ✶ NAV -->
 {% include "nav.njk" %}
 
-<!-- ✶ FREEDOM34 FLYOUT PANEL -->
-<div
-  id="freedomPanel"
-  class="hidden fixed top-14 left-0 w-full h-[50vh] bg-[#0a0a0a] border-t border-neutral-800 text-whisper font-mono text-sm z-40 transition-all duration-300 ease-in-out"
+<!-- ✶ MOBILE OVERLAY NAV (hidden on desktop) -->
+<div id="navOverlay"
+  class="hidden fixed inset-0 bg-[#0a0a0a] text-whisper z-50 px-6 py-8 space-y-6 text-lg overflow-y-auto md:hidden"
 >
-  <div class="max-w-6xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between gap-8">
-    <div class="space-y-3 max-w-xl">
-      <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
-      <p class="opacity-80 leading-snug">
-        Soul-coded tools for artists and studios. No roadmap. Just resonance.
-      </p>
-      <p class="text-xs text-neutral-500">Everything here hums quietly until called.</p>
-    </div>
+  <a href="/" class="block">Início</a>
 
-    <div class="space-y-2">
-      <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
-      <a href="/branches" class="block hover:text-suav transition">Branches</a>
-      <a href="/docs" class="block hover:text-suav transition">Docs</a>
-    </div>
+  <button id="freedomToggle" class="flex items-center gap-1 w-full text-left">
+    Freedom34
+    <svg id="freedomChevron" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div id="freedomPanel" class="hidden pl-4 border-l border-neutral-700 space-y-2 pt-2">
+    <a href="/freebies" class="block text-base text-suav">✶ Freebies</a>
+    <a href="/branches" class="block text-base">Branches</a>
+    <a href="/docs" class="block text-base">Docs</a>
   </div>
+
+  <a href="/creative" class="block">Creative</a>
+  <a href="/philosophy" class="block">Philosophy</a>
+  <a href="/contact" class="block">Contact</a>
 </div>
+
+
+
+
+
 
     <!-- ✶ CLICK MESSAGE -->
     <p id="click-message" class="text-xs text-center text-suav/60 mt-4 opacity-0 transition-opacity duration-500">
@@ -139,71 +152,46 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ DOM fully loaded");
-
-    // ✶ Element References
     const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    const navOverlay = document.getElementById("navOverlay"); // Optional if you go full overlay
-    const toggleBtn = document.getElementById("freedomToggle");
-    const chevronIcon = document.getElementById("freedomChevron");
-    const panel = document.getElementById("freedomPanel");
+    const navOverlay = document.getElementById("navOverlay");
+    const freedomToggle = document.getElementById("freedomToggle");
+    const freedomPanel = document.getElementById("freedomPanel");
+    const freedomChevron = document.getElementById("freedomChevron");
 
-    // 🧠 Debug warnings
-    if (!menuToggle) console.warn("⚠️ menuToggle not found");
-    if (!navLinks) console.warn("⚠️ navLinks not found");
-    if (!toggleBtn) console.warn("⚠️ freedomToggle not found");
-    if (!panel) console.warn("⚠️ freedomPanel not found");
-
-    // 🍔 Mobile Menu Toggle
+    // 🍔 Toggle overlay menu
     menuToggle?.addEventListener("click", () => {
-      console.log("🍔 Hamburger clicked");
-
-      // For simple dropdown:
-      navLinks?.classList.toggle("hidden");
-      const isOpen = !navLinks?.classList.contains("hidden");
-      document.body.style.overflow = isOpen ? "hidden" : "";
-
-      // If using #navOverlay instead of #navLinks
-      // const isOpen = navOverlay?.classList.toggle("hidden");
-      // document.body.style.overflow = isOpen ? "hidden" : "";
+      const isOpen = navOverlay.classList.toggle("hidden");
+      document.body.style.overflow = isOpen ? "" : "hidden";
     });
 
-    // ✶ Freedom34 Flyout Toggle
-    toggleBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      console.log("✶ Freedom34 clicked");
-
-      panel?.classList.toggle("hidden");
-      chevronIcon?.classList.toggle("rotate-180");
-
-      const isOpen = !panel?.classList.contains("hidden");
-      document.body.style.overflow = isOpen ? "hidden" : "";
+    // ✶ Toggle Freedom34 panel
+    freedomToggle?.addEventListener("click", () => {
+      const open = freedomPanel.classList.toggle("hidden");
+      freedomChevron?.classList.toggle("rotate-180", open);
     });
 
-    // 🧹 Close nav on mobile link click
-    document.querySelectorAll("#navLinks a").forEach(link => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth < 768 && !navLinks?.classList.contains("hidden")) {
-          navLinks.classList.add("hidden");
-          document.body.style.overflow = "";
-          console.log("🧹 Closed mobile nav on link tap");
-        }
-      });
-    });
-
-    // ⎋ ESC to close all
+    // ⎋ ESC closes everything
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        navLinks?.classList.add("hidden");
-        panel?.classList.add("hidden");
-        chevronIcon?.classList.remove("rotate-180");
-        navOverlay?.classList?.add("hidden"); // optional
+        navOverlay?.classList.add("hidden");
+        freedomPanel?.classList.add("hidden");
+        freedomChevron?.classList.remove("rotate-180");
         document.body.style.overflow = "";
       }
     });
+
+    // 🧹 Close overlay on link click
+    document.querySelectorAll("#navOverlay a").forEach(link => {
+      link.addEventListener("click", () => {
+        navOverlay?.classList.add("hidden");
+        freedomPanel?.classList.add("hidden");
+        freedomChevron?.classList.remove("rotate-180");
+        document.body.style.overflow = "";
+      });
+    });
   });
 </script>
+
 
 
 
