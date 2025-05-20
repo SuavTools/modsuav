@@ -19,26 +19,31 @@
 </audio>
 
   <!-- ✶ NAVIGATION -->
-  <nav class="p-4 bg-[#111111] flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <img src="/logo.svg" alt="SUAV logo" class="h-6 w-6" />
-      <span class="text-whisper font-bold tracking-wide text-lg">modsuav*</span>
-    </div>
-    <ul class="flex gap-6 text-sm font-medium relative items-center">
-      <li><a href="/" class="hover:text-suav transition">Início</a></li>
-      <li class="group relative">
-        <button class="hover:text-suav transition">Freedom34</button>
-        <div class="absolute hidden group-hover:flex flex-col bg-backdrop border border-whisper mt-2 p-2 w-44 z-20 shadow-xl">
-          <a href="/plugins" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Plugins</a>
-          <a href="/branches" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Branches</a>
-          <a href="/docs" class="block text-left px-4 py-2 text-whisper hover:bg-suav/10 rounded transition">Docs</a>
-        </div>
-      </li>
-      <li><a href="/creative" class="hover:text-suav transition">Creative</a></li>
-      <li><a href="/philosophy" class="hover:text-suav transition">Philosophy</a></li>
-      <li><a href="/contact" class="hover:text-suav transition">Contact</a></li>
-    </ul>
-  </nav>
+<nav class="p-4 bg-[#111111] flex justify-between items-center">
+  <div class="flex items-center gap-3">
+    <img src="/logo.svg" alt="SUAV logo" class="h-6 w-6" />
+    <span class="text-whisper font-bold tracking-wide text-lg">modsuav*</span>
+  </div>
+
+  <ul class="flex gap-6 text-sm font-medium relative items-center">
+    <li><a href="/" class="hover:text-suav transition">Início</a></li>
+
+    <!-- FREEDOM34 DROPDOWN -->
+    <li class="group relative">
+      <button class="hover:text-suav transition">Freedom34</button>
+      <div class="absolute hidden group-hover:flex flex-col bg-backdrop border border-whisper mt-2 p-3 w-48 z-20 shadow-xl">
+        <a href="/freebies" class="block px-3 py-2 hover:bg-suav/10 rounded">Freebies ✶</a>
+        <a href="/branches" class="block px-3 py-2 hover:bg-suav/10 rounded">Branches</a>
+        <a href="/docs" class="block px-3 py-2 hover:bg-suav/10 rounded">Docs</a>
+      </div>
+    </li>
+
+    <li><a href="/creative" class="hover:text-suav transition">Creative</a></li>
+    <li><a href="/philosophy" class="hover:text-suav transition">Philosophy</a></li>
+    <li><a href="/contact" class="hover:text-suav transition">Contact</a></li>
+  </ul>
+</nav>
+
 
 <p id="click-message" class="text-xs text-center text-suav/60 mt-4 opacity-0 transition-opacity duration-500">
   ✶ connection verified
