@@ -20,45 +20,36 @@
       <source src="/intro.mp3" type="audio/mpeg" />
     </audio>
 
-
-
-
     <!-- ✶ DESKTOP NAV -->
     {% include "nav.njk" %}
 
-<!-- ✶ DESKTOP FULL-WIDTH FLYOUT (50vh) -->
-<div
-  id="freedomPanelDesktop"
-  class="hidden fixed top-14 left-0 w-full h-[50vh] bg-[#0a0a0a] border-t border-neutral-800
-         text-whisper font-mono text-sm z-40 transition-all duration-300 ease-in-out md:block hidden"
->
-  <div class="max-w-6xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between gap-8">
-    <div class="space-y-3 max-w-xl">
-      <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
-      <p class="opacity-80 leading-snug">
-        Soul-coded tools for artists and studios. No roadmap. Just resonance.
-      </p>
-      <p class="text-xs text-neutral-500">Everything here hums quietly until called.</p>
+    <!-- ✶ DESKTOP 50VH DROPDOWN -->
+    <div
+      id="freedomPanelDesktop"
+      class="hidden fixed top-14 left-0 w-full h-[50vh] bg-[#0a0a0a] border-t border-neutral-800
+             text-whisper font-mono text-sm z-40 transition-all duration-300 ease-in-out md:block"
+    >
+      <div class="max-w-6xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between gap-8">
+        <div class="space-y-3 max-w-xl">
+          <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
+          <p class="opacity-80 leading-snug">
+            Soul-coded tools for artists and studios. No roadmap. Just resonance.
+          </p>
+          <p class="text-xs text-neutral-500">Everything here hums quietly until called.</p>
+        </div>
+        <div class="space-y-2">
+          <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
+          <a href="/branches" class="block hover:text-suav transition">Branches</a>
+          <a href="/docs" class="block hover:text-suav transition">Docs</a>
+        </div>
+      </div>
     </div>
 
-    <div class="space-y-2">
-      <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
-      <a href="/branches" class="block hover:text-suav transition">Branches</a>
-      <a href="/docs" class="block hover:text-suav transition">Docs</a>
-    </div>
-  </div>
-</div>
-
-
-
-
-    <!-- ✶ MOBILE OVERLAY NAV (md:hidden) -->
+    <!-- ✶ MOBILE NAV OVERLAY -->
     <div id="navOverlay"
       class="hidden fixed inset-0 bg-[#0a0a0a] text-whisper z-50 px-6 py-8 space-y-6 text-lg overflow-y-auto md:hidden"
     >
       <a href="/" class="block">Início</a>
-
-      <!-- Mobile Freedom34 Flyout -->
       <button id="freedomToggleMobile" class="flex items-center gap-1 w-full text-left">
         Freedom34
         <svg id="freedomChevronMobile" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,36 +61,27 @@
         <a href="/branches" class="block text-base">Branches</a>
         <a href="/docs" class="block text-base">Docs</a>
       </div>
-
       <a href="/creative" class="block">Creative</a>
       <a href="/philosophy" class="block">Philosophy</a>
       <a href="/contact" class="block">Contact</a>
     </div>
-
-
 
     <!-- ✶ CLICK MESSAGE -->
     <p id="click-message" class="text-xs text-center text-suav/60 mt-4 opacity-0 transition-opacity duration-500">
       ✶ connection verified
     </p>
 
-
-
     <!-- ✶ MAIN SLOT -->
     <main class="flex-1">
       {{ content | safe }}
     </main>
 
-
-
     <!-- ✶ FOOTER -->
     {% include "footer.njk" %}
 
-
-
     <!-- ✶ CONSOLE SCRIPT -->
     <script>
-      // Loader logic
+      // LOADER SEQUENCE
       const messages = [
         "initializing modsuav console",
         "linking to grove tree",
@@ -108,47 +90,32 @@
         "syncing encrypted memory",
         "✶ ready"
       ];
-
       const bootSound = document.getElementById("boot-sound");
-
-      bootSound?.play().catch((err) => {
-        console.log("Autoplay blocked, will wait for user interaction:", err);
-      });
-
+      bootSound?.play().catch(err => console.log("Autoplay blocked", err));
       let hasUserClicked = false;
-
       window.addEventListener("click", () => {
         if (hasUserClicked) return;
         hasUserClicked = true;
-
-        bootSound?.play().catch(err => {
-          console.warn("Manual playback failed:", err);
-        });
-
+        bootSound?.play().catch(err => console.warn("Manual playback failed:", err));
         const clickMessage = document.getElementById("click-message");
-        if (clickMessage) {
-          clickMessage.classList.remove("opacity-0");
-          clickMessage.classList.add("opacity-100");
-          setTimeout(() => {
-            clickMessage.classList.remove("opacity-100");
-            clickMessage.classList.add("opacity-0");
-          }, 3500);
-        }
+        clickMessage?.classList.remove("opacity-0");
+        clickMessage?.classList.add("opacity-100");
+        setTimeout(() => {
+          clickMessage?.classList.remove("opacity-100");
+          clickMessage?.classList.add("opacity-0");
+        }, 3500);
       }, { once: true });
-
       if (!sessionStorage.getItem("modsuavLoaded")) {
         sessionStorage.setItem("modsuavLoaded", "true");
         let messageIndex = 0;
         const loaderMessage = document.getElementById("loader-message");
         const dotSequence = document.getElementById("dot-sequence");
-
         const dots = [".", "..", "..."];
         let dotState = 0;
         const dotTimer = setInterval(() => {
           dotState = (dotState + 1) % dots.length;
           dotSequence.textContent = dots[dotState];
         }, 300);
-
         const messageDelay = 500;
         const messageTimer = setInterval(() => {
           messageIndex++;
@@ -159,97 +126,89 @@
           }
           loaderMessage.textContent = messages[messageIndex];
         }, messageDelay);
-
         setTimeout(() => {
           const loader = document.getElementById("loader");
-          if (loader) {
-            loader.classList.add("opacity-0");
-            setTimeout(() => loader.remove(), 600);
-          }
+          loader?.classList.add("opacity-0");
+          setTimeout(() => loader?.remove(), 600);
         }, messageDelay * (messages.length + 1));
       } else {
         document.getElementById("loader")?.remove();
       }
     </script>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 🍔 Mobile toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const navOverlay = document.getElementById("navOverlay");
 
+        menuToggle?.addEventListener("click", () => {
+          const isOpen = navOverlay.classList.toggle("hidden");
+          document.body.style.overflow = isOpen ? "" : "hidden";
+        });
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // 🍔 Mobile nav toggle
-    const menuToggle = document.getElementById("menuToggle");
-    const navOverlay = document.getElementById("navOverlay");
+        // ✶ Mobile Freedom34 flyout
+        const freedomToggleMobile = document.getElementById("freedomToggleMobile");
+        const freedomPanelMobile = document.getElementById("freedomPanelMobile");
+        const freedomChevronMobile = document.getElementById("freedomChevronMobile");
 
-    menuToggle?.addEventListener("click", () => {
-      const isOpen = navOverlay.classList.toggle("hidden");
-      document.body.style.overflow = isOpen ? "" : "hidden";
-    });
+        freedomToggleMobile?.addEventListener("click", () => {
+          const open = freedomPanelMobile.classList.toggle("hidden");
+          freedomChevronMobile?.classList.toggle("rotate-180", open);
+        });
 
-    // ✶ Mobile Freedom34 flyout
-    const freedomToggleMobile = document.getElementById("freedomToggleMobile");
-    const freedomPanelMobile = document.getElementById("freedomPanelMobile");
-    const freedomChevronMobile = document.getElementById("freedomChevronMobile");
+        // ✶ Desktop Freedom34 flyout
+        const freedomToggleDesktop = document.getElementById("freedomToggleDesktop");
+        const freedomPanelDesktop = document.getElementById("freedomPanelDesktop");
+        const freedomChevronDesktop = document.getElementById("freedomChevronDesktop");
 
-    freedomToggleMobile?.addEventListener("click", () => {
-      const open = freedomPanelMobile.classList.toggle("hidden");
-      freedomChevronMobile?.classList.toggle("rotate-180", open);
-    });
+        freedomToggleDesktop?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = freedomPanelDesktop.classList.toggle("hidden");
+          freedomChevronDesktop?.classList.toggle("rotate-180", open);
+        });
 
-    // ✶ Desktop Freedom34 50vh drop panel
-    const freedomToggleDesktop = document.getElementById("freedomToggleDesktop");
-    const freedomPanelDesktop = document.getElementById("freedomPanelDesktop");
-    const freedomChevronDesktop = document.getElementById("freedomChevronDesktop");
+        // Click outside closes desktop flyout
+        document.addEventListener("click", (e) => {
+          const isDesktop = window.innerWidth >= 768;
+          if (
+            isDesktop &&
+            freedomPanelDesktop &&
+            !freedomPanelDesktop.classList.contains("hidden") &&
+            !freedomPanelDesktop.contains(e.target) &&
+            !freedomToggleDesktop.contains(e.target)
+          ) {
+            freedomPanelDesktop.classList.add("hidden");
+            freedomChevronDesktop?.classList.remove("rotate-180");
+          }
+        });
 
-    freedomToggleDesktop?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const open = freedomPanelDesktop.classList.toggle("hidden");
-      freedomChevronDesktop?.classList.toggle("rotate-180", open);
-    });
+        // ⎋ ESC closes all
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            navOverlay?.classList.add("hidden");
+            document.body.style.overflow = "";
+            freedomPanelMobile?.classList.add("hidden");
+            freedomChevronMobile?.classList.remove("rotate-180");
+            freedomPanelDesktop?.classList.add("hidden");
+            freedomChevronDesktop?.classList.remove("rotate-180");
+          }
+        });
 
-    // 🧹 Close desktop panel when clicking outside (desktop only)
-    document.addEventListener("click", (e) => {
-      const isDesktop = window.innerWidth >= 768;
-      if (
-        isDesktop &&
-        freedomPanelDesktop &&
-        !freedomPanelDesktop.classList.contains("hidden") &&
-        !freedomPanelDesktop.contains(e.target) &&
-        !freedomToggleDesktop.contains(e.target)
-      ) {
-        freedomPanelDesktop.classList.add("hidden");
-        freedomChevronDesktop?.classList.remove("rotate-180");
-      }
-    });
-
-    // ⎋ ESC closes everything
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        navOverlay?.classList.add("hidden");
-        document.body.style.overflow = "";
-
-        freedomPanelMobile?.classList.add("hidden");
-        freedomChevronMobile?.classList.remove("rotate-180");
-
-        freedomPanelDesktop?.classList.add("hidden");
-        freedomChevronDesktop?.classList.remove("rotate-180");
-      }
-    });
-
-    // 📱 Close mobile overlay on nav tap
-    document.querySelectorAll("#navOverlay a").forEach(link => {
-      link.addEventListener("click", () => {
-        navOverlay?.classList.add("hidden");
-        freedomPanelMobile?.classList.add("hidden");
-        freedomChevronMobile?.classList.remove("rotate-180");
-        document.body.style.overflow = "";
+        // 🧹 Mobile: close on nav link click
+        document.querySelectorAll("#navOverlay a").forEach(link => {
+          link.addEventListener("click", () => {
+            navOverlay?.classList.add("hidden");
+            freedomPanelMobile?.classList.add("hidden");
+            freedomChevronMobile?.classList.remove("rotate-180");
+            document.body.style.overflow = "";
+          });
+        });
       });
-    });
-  });
-</script>
-
-
+    </script>
   </body>
 </html>
+
 
 
 
