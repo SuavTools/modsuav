@@ -1,19 +1,15 @@
-<nav class="p-4 bg-[#111111] flex justify-between items-center">
+<nav class="p-4 bg-[#111111] flex justify-between items-center relative z-50">
   <div class="flex items-center gap-3">
     <img src="/logo.svg" alt="SUAV logo" class="h-6 w-6" />
     <span class="text-whisper font-bold tracking-wide text-lg">modsuav*</span>
   </div>
 
-  <ul class="flex gap-6 text-sm font-medium relative items-center">
+  <ul class="flex gap-6 text-sm font-medium items-center">
     <li><a href="/" class="hover:text-suav transition">Início</a></li>
 
-    <li class="group relative">
-      <button class="hover:text-suav transition">Freedom34</button>
-      <div class="absolute hidden group-hover:flex flex-col bg-backdrop border border-whisper mt-2 p-3 w-48 z-20 shadow-xl">
-        <a href="/freebies" class="block px-3 py-2 hover:bg-suav/10 rounded">Freebies ✶</a>
-        <a href="/branches" class="block px-3 py-2 hover:bg-suav/10 rounded">Branches</a>
-        <a href="/docs" class="block px-3 py-2 hover:bg-suav/10 rounded">Docs</a>
-      </div>
+    <!-- Freedom34 with flyout -->
+    <li class="relative">
+      <button id="freedomToggle" class="hover:text-suav transition">Freedom34</button>
     </li>
 
     <li><a href="/creative" class="hover:text-suav transition">Creative</a></li>
@@ -21,3 +17,54 @@
     <li><a href="/contact" class="hover:text-suav transition">Contact</a></li>
   </ul>
 </nav>
+
+<!-- Full-width Freedom34 Panel -->
+<div
+  id="freedomPanel"
+  class="hidden fixed top-14 left-0 w-full h-[50vh] bg-[#0a0a0a] border-t border-neutral-800 text-whisper font-mono text-sm z-40 transition-all"
+>
+  <div class="max-w-6xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between gap-8">
+    <!-- Left Side -->
+    <div class="space-y-3 max-w-xl">
+      <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
+      <p class="opacity-80 leading-snug">
+        Soul-coded tools for artists and studios. No roadmap. Just resonance.
+      </p>
+      <p class="text-xs text-neutral-500">Everything here hums quietly until called.</p>
+    </div>
+
+    <!-- Right Links -->
+    <div class="space-y-2">
+      <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
+      <a href="/branches" class="block hover:text-suav transition">Branches</a>
+      <a href="/docs" class="block hover:text-suav transition">Docs</a>
+    </div>
+  </div>
+</div>
+
+<!-- ✶ FREEDOM34 PANEL -->
+<div
+  id="freedomPanel"
+  class="hidden fixed top-16 left-0 w-full h-[50vh] z-40 bg-[#0a0a0a] border-t border-neutral-800 text-whisper font-mono text-sm px-8 py-8 transition-all"
+>
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+    <!-- Left: Console Text -->
+    <div class="space-y-3 max-w-xl">
+      <h2 class="text-xl font-bold text-suav">SUAV Console Labs</h2>
+      <p class="opacity-80 leading-snug">
+        Soul-coded infrastructure. No noise. No tracking.  
+        Just encrypted tools for aligned creators.
+      </p>
+      <p class="text-xs text-neutral-500">→ Rituals for those who listen.</p>
+    </div>
+
+    <!-- Right: Flyout Links -->
+    <div class="space-y-2">
+      <a href="/freebies" class="block hover:text-suav transition">Freebies ✶</a>
+      <a href="/branches" class="block hover:text-suav transition">Branches</a>
+      <a href="/docs" class="block hover:text-suav transition">Docs</a>
+    </div>
+  </div>
+</div>
+
+
